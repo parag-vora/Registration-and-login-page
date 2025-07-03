@@ -1,12 +1,14 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-using namespace std;
+#include <ctime>
+using namespace std; 
 
 class temp{
     private: 
     string _username, _password, _email;
     string _searchUsername, _searchPassword, _searchEmail;
+    time_t _currentTime = time(NULL);
     fstream file;
     public:
     void loginFun();
@@ -61,6 +63,7 @@ void temp::signupFun(){
 
 void temp::loginFun(){
 
+    tm *tm_local = localtime(&_currentTime);
     cout << "\n............LOGIN PAGE.........." << endl;
     cout << "\nEnter your username: ";
     getline(cin, _searchUsername);
@@ -75,7 +78,8 @@ void temp::loginFun(){
     while(!file.eof()){
         if(_searchUsername == _username){
             if(_searchPassword == _password){
-                cout << "Login Sucessfully" << endl;
+                cout << "Login Sucessfully at" << endl;
+                cout << tm_local->tm_mday<< "." << tm_local->tm_mon + 1<< "." << tm_local->tm_year + 1900 << " H: " << tm_local->tm_hour << " M: " << tm_local->tm_min << " S: " << tm_local->tm_sec << endl;
                 cout << "your Usernamer is: " << _username << endl;
                 cout << "your email is: " << _email << endl;
                 cout << "your password is: " << _password << endl;
