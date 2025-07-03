@@ -1,0 +1,5 @@
+# Ignore login data file
+logindata.txt
+
+# Ignore executable files
+*.exe
