@@ -8,6 +8,7 @@ class temp{
     private: 
     string _username, _password, _email;
     string _searchUsername, _searchPassword, _searchEmail;
+    uint8_t _enterCtr = 1;
     time_t _currentTime = time(NULL);
     fstream file;
     public:
@@ -106,16 +107,20 @@ void temp::forgotFun(){
     getline(file, _password, '\n');
 
     while(!file.eof()){
-        if (_searchUsername == _username){
-            if(_searchEmail == _email){
-                cout << "\nyour password is: " << _password << endl;
-                break;
+            if (_searchUsername == _username && _searchEmail == _email){
+                    cout << "\nyour password is: " << _password << endl;
+                    break; 
             } else {
-                cout << "\nInvalid Input......." << endl; 
-            } 
-        } else {
-            cout << "\nInvalid Input........." << endl;
-        }    
+                cout << "\nInvalid Input........." << endl;
+                    cout << "\nAgain Enter your username: ";
+                    getline(cin, _searchUsername);
+                    cout << "\n Again Enter your Email: ";
+                    getline(cin, _searchEmail);
+                    if(_enterCtr++ == 2){
+                        cout << "\nYou have enterd 3 times wrong input" << endl;
+                        break;
+                    }
+            }    
     }
     file.close();
 }
