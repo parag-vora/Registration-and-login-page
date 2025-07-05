@@ -15,6 +15,7 @@ class temp{
     void loginFun();
     void signupFun();
     void forgotFun();
+    void deleteAccountFun();
 }obj;
 
 int main(){
@@ -24,6 +25,7 @@ int main(){
     cout << "\n2. Sign Up" << endl;
     cout << "\n3. Forgot Password" << endl;
     cout << "\n4. exit" << endl;
+    cout << "\n5. Delete Account" << endl;
     cout << "Enter your choice.........";
     cin >> enterValue;
     cin.ignore();  
@@ -41,7 +43,10 @@ int main(){
         break;
     case '4':
         return 0;
-        break;        
+        break;  
+    case '5':
+        obj.deleteAccountFun();
+        break;          
     default:
         cout << "Entered a Invalid Input" << endl;
         break;
@@ -125,3 +130,32 @@ void temp::forgotFun(){
     file.close();
 }
 
+void temp::deleteAccountFun(){
+    cout << "\nEnter your username to delete your account: ";
+    getline(cin, _searchUsername);
+    
+    fstream tempFile;
+    tempFile.open("temp.txt", ios::out | ios::app);
+    file.open("logindata.txt", ios::in);
+
+    getline(file, _username, '*');
+    getline(file, _email, '*');
+    getline(file, _password, '\n');
+
+    while(!file.eof()){
+        if(_searchUsername != _username){
+            tempFile << _username << "*" << _email << "*" << _password << endl;
+        }
+        getline(file, _username, '*');
+        getline(file, _email, '*');
+        getline(file, _password, '\n');    
+    }
+    
+    file.close();
+    tempFile.close();
+    
+    remove("logindata.txt");
+    rename("temp.txt", "logindata.txt");
+    
+    cout << "Account deleted successfully." << endl;
+}
