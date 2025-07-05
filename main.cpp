@@ -117,7 +117,7 @@ void temp::forgotFun(){
                     cout << "\n Again Enter your Email: ";
                     getline(cin, _searchEmail);
                     if(_enterCtr++ == 2){
-                        cout << "\nYou have enterd 3 times wrong input" << endl;
+                        cout << "\nYou have enterd 3 times wrong input. Do again" << endl;
                         break;
                     }
             }    

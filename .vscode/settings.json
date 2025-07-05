@@ -5,6 +5,7 @@
         "istream": "cpp",
         "iostream": "cpp",
         "xiosbase": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "xlocmes": "cpp"
     }
 }
